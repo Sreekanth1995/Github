@@ -1,5 +1,5 @@
 //
-//  Pull.swift
+//  PullRequest.swift
 //  GitHub
 //
 //  Created by M sreekanth  on 07/10/22.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pull: Codable {
+struct PullRequest: Codable {
     let url: String?
     let id: Int?
     let node_id: String?
