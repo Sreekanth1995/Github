@@ -16,6 +16,7 @@
 		C70721D028EFFCCD00844D21 /* GitHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721CF28EFFCCD00844D21 /* GitHubTests.swift */; };
 		C70721DA28EFFCCD00844D21 /* GitHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721D928EFFCCD00844D21 /* GitHubUITests.swift */; };
 		C70721DC28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */; };
+		C70721EA28F07A0E00844D21 /* Pull.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721E928F07A0E00844D21 /* Pull.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		C70721D928EFFCCD00844D21 /* GitHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITests.swift; sourceTree = "<group>"; };
 		C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C70721E828F0465700844D21 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C70721E928F07A0E00844D21 /* Pull.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pull.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
 				C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */,
 				C70721BC28EFFCCB00844D21 /* ViewController.swift */,
+				C70721E928F07A0E00844D21 /* Pull.swift */,
 				C70721BE28EFFCCB00844D21 /* Main.storyboard */,
 				C70721C128EFFCCD00844D21 /* Assets.xcassets */,
 				C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 			files = (
 				C70721BD28EFFCCB00844D21 /* ViewController.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
+				C70721EA28F07A0E00844D21 /* Pull.swift in Sources */,
 				C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
