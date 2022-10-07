@@ -108,8 +108,7 @@
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
 				C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */,
 				C70721BC28EFFCCB00844D21 /* ViewController.swift */,
-				C70721E928F07A0E00844D21 /* PullRequest.swift */,
-				C70721EB28F07BB800844D21 /* PullsLoader.swift */,
+				C70721ED28F07D3F00844D21 /* PullRequestsFeature */,
 				C70721BE28EFFCCB00844D21 /* Main.storyboard */,
 				C70721C128EFFCCD00844D21 /* Assets.xcassets */,
 				C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */,
@@ -133,6 +132,15 @@
 				C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */,
 			);
 			path = GitHubUITests;
+			sourceTree = "<group>";
+		};
+		C70721ED28F07D3F00844D21 /* PullRequestsFeature */ = {
+			isa = PBXGroup;
+			children = (
+				C70721E928F07A0E00844D21 /* PullRequest.swift */,
+				C70721EB28F07BB800844D21 /* PullsLoader.swift */,
+			);
+			path = PullRequestsFeature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
