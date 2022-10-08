@@ -59,10 +59,13 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversNoItemsOn200ResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWithError: .invalidData, when: {
-            let invalidJson = Data("InvalidJSON".utf8)
-            client.complete(withStatusCode: 200, data: invalidJson)
-        })
+        var captureResult = [RemotePullRequestLoader.Result]()
+        sut.load {
+            captureResult.append($0)
+        }
+        let emptyListJson = Data("[]".utf8)
+        client.complete(withStatusCode: 200, data: emptyListJson)
+        XCTAssertEqual(captureResult, [.success([])])
     }
 
     // MARK: Helpers
@@ -74,7 +77,7 @@ class PullReqLoaderTests: XCTestCase {
                         line: UInt = #line) {
         var captureResult = [RemotePullRequestLoader.Result]()
         sut.load {
-            captureResult.append(.failure($0))
+            captureResult.append($0)
         }
         action()
         XCTAssertEqual(captureResult, [.failure(error)], file: file, line: line)

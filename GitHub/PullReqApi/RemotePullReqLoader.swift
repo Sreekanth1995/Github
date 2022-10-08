@@ -36,13 +36,17 @@ final class RemotePullRequestLoader {
         self.url = url
     }
     
-    func load(completion: @escaping (Error) -> Void) {
+    func load(completion: @escaping (Result) -> Void) {
         client.get(from: url, completion: { result in
             switch result {
-            case .success:
-                completion(.invalidData)
+            case .success(let data, let _):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) {
+                    completion(.success([]))
+                } else {
+                    completion(.failure(.invalidData))
+                }
             case .failure:
-                completion(.connectivity)
+                completion(.failure(.connectivity))
             }
         })
     }
