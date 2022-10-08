@@ -15,14 +15,14 @@ class AlamofireHTTPClient: HTTPClient {
         self.session = session
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
         session.request(url)
             .responseData { dataResponse in
                 switch dataResponse.result {
                 case .success(let data):
-                    completion(.success(data, dataResponse.response!))
+                    completion(HTTPClient.Result.success((data, dataResponse.response!)))
                 case .failure(let err):
-                    completion(.failure(err))
+                    completion(HTTPClient.Result.failure(err))
                 }
             }
     }

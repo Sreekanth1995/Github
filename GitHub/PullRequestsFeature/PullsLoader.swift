@@ -7,11 +7,8 @@
 
 import Foundation
 
-enum LoadPullRequestsResult {
-    case success([PullRequest])
-    case failure(Error)
-}
-
 protocol PullRequestsLoader {
-    func load(_ completion: @escaping (LoadPullRequestsResult) -> Void)
+    typealias Result = Swift.Result<[PullRequest], Error>
+    
+    func load(_ completion: @escaping (PullRequestsLoader.Result) -> Void)
 }

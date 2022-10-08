@@ -16,7 +16,7 @@ final class RemotePullRequestLoader: PullRequestsLoader {
         case invalidData
     }
     
-    typealias Result = LoadPullRequestsResult
+    typealias Result = PullRequestsLoader.Result
 
     init(url: URL, client: HTTPClient) {
         self.client = client
@@ -30,7 +30,7 @@ final class RemotePullRequestLoader: PullRequestsLoader {
             case .success(let data, let response):
                 completion(PRItemsMapper.map(data: data, response: response))
             case .failure:
-                completion(.failure(Error.connectivity))
+                completion(PullRequestsLoader.Result.failure(Error.connectivity))
             }
         })
     }    

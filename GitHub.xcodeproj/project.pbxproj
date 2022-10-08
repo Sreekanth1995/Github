@@ -136,11 +136,11 @@
 		C70721B728EFFCCB00844D21 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
+				C70721ED28F07D3F00844D21 /* PullRequestsFeature */,
 				C70721F028F166B500844D21 /* PullReqApi */,
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
 				C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */,
 				C70721BC28EFFCCB00844D21 /* ViewController.swift */,
-				C70721ED28F07D3F00844D21 /* PullRequestsFeature */,
 				C70721BE28EFFCCB00844D21 /* Main.storyboard */,
 				C70721C128EFFCCD00844D21 /* Assets.xcassets */,
 				C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */,
