@@ -7,8 +7,14 @@
 
 import Foundation
 
+enum HTTPClientResult {
+    case success(HTTPURLResponse)
+    case failure(Error)
+}
+
+
 protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (Error?, HTTPURLResponse?) -> Void)
+    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
 
 final class RemotePullRequestLoader {
@@ -26,10 +32,11 @@ final class RemotePullRequestLoader {
     }
     
     func load(completion: @escaping (Error) -> Void) {
-        client.get(from: url, completion: { error, response in
-            if response?.statusCode != 200 {
+        client.get(from: url, completion: { result in
+            switch result {
+            case .success(let response):
                 completion(.invalidData)
-            } else {
+            case .failure(let error):
                 completion(.connectivity)
             }
         })
