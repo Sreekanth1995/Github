@@ -40,8 +40,8 @@ final class RemotePullRequestLoader {
         client.get(from: url, completion: { result in
             switch result {
             case .success(let data, let _):
-                if let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) {
-                    completion(.success([]))
+                if let json = try? JSONDecoder().decode([PullRequest].self, from: data) {
+                    completion(.success(json))
                 } else {
                     completion(.failure(.invalidData))
                 }

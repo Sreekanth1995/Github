@@ -33,7 +33,7 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWithError: .connectivity, when: {
+        expect(sut, toCompleteWithResult: .failure(.connectivity), when: {
             let error = NSError(domain: "Test", code: 0)
             client.complete(with: error, at: 0)
         })
@@ -43,7 +43,7 @@ class PullReqLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         let invalidStatusCodes = [199, 300, 400, 404, 500]
         invalidStatusCodes.enumerated().forEach { index, code in
-            expect(sut, toCompleteWithError: .invalidData, when: {
+            expect(sut, toCompleteWithResult: .failure(.invalidData), when: {
                 client.complete(withStatusCode: code, at: index)
             })
         }
@@ -51,7 +51,7 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOn200ResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWithError: .invalidData, when: {
+        expect(sut, toCompleteWithResult: .failure(.invalidData), when: {
             let invalidJson = Data("InvalidJSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJson)
         })
@@ -59,19 +59,41 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversNoItemsOn200ResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
-        var captureResult = [RemotePullRequestLoader.Result]()
-        sut.load {
-            captureResult.append($0)
-        }
-        let emptyListJson = Data("[]".utf8)
-        client.complete(withStatusCode: 200, data: emptyListJson)
-        XCTAssertEqual(captureResult, [.success([])])
+        expect(sut, toCompleteWithResult: .success([]), when: {
+            let emptyListJson = Data("[]".utf8)
+            client.complete(withStatusCode: 200, data: emptyListJson)
+        })
     }
 
+    func test_load_deliverItemsOn200ResponseWithJSONData() {
+        let (sut, client) = makeSUT()
+        let obj1 = makeItem(id: 1076581210,
+                            url: URL(string:"https://api.github.com/repos/apple/swift/pulls/61443")!,
+                            state: "open",
+                            body: "When an anonymous enum is imported",
+                            title: "Respect NS_REFINED_FOR_SWIFT importing anon enums",
+                            createdAt: "2022-10-04T22:41:36Z",
+                            closedAt: nil)
+        
+        let obj2 = makeItem(id: 1077335864,
+                            url: URL(string: "https://api.github.com/repos/apple/swift/pulls/61447")!,
+                            state: "closed",
+                            body: "They fail on arm64e on some bots.\r\n\r\nrdar://100805115",
+                            title: "Disable Reflection/typeref_decoding(_asan).swift tests",
+                            createdAt: "2022-10-05T13:22:32Z",
+                            closedAt: "2022-10-05T13:24:39Z")
+        let array = [obj1.json, obj2.json]
+        let items = [obj1.model, obj2.model]
+        expect(sut, toCompleteWithResult: .success(items), when: {
+            let data = makeItemJson(items: array)
+            client.complete(withStatusCode: 200, data: data)
+        })
+    }
+    
     // MARK: Helpers
     
     private func expect(_ sut: RemotePullRequestLoader,
-                        toCompleteWithError error: RemotePullRequestLoader.Error,
+                        toCompleteWithResult result: RemotePullRequestLoader.Result,
                         when action: () -> Void,
                         file: StaticString = #file,
                         line: UInt = #line) {
@@ -80,13 +102,44 @@ class PullReqLoaderTests: XCTestCase {
             captureResult.append($0)
         }
         action()
-        XCTAssertEqual(captureResult, [.failure(error)], file: file, line: line)
+        XCTAssertEqual(captureResult, [result], file: file, line: line)
     }
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!) -> (sut: RemotePullRequestLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemotePullRequestLoader(url: url, client: client)
         return (sut: sut, client: client)
+    }
+    
+    private func makeItem(id: Int,
+                          url: URL,
+                          state: String,
+                          body: String?,
+                          title: String?,
+                          createdAt: String?,
+                          closedAt: String?) -> (model: PullRequest, json: [String: Any]) {
+        let pullRequest = PullRequest(id: id,
+                                      url: url,
+                                      state: state,
+                                      body: body,
+                                      title: title,
+                                      createdAt: createdAt,
+                                      closedAt: closedAt)
+        let jsonObject: [String: Any?] = [
+            "id": id,
+            "url": url.absoluteString,
+            "state": state,
+            "body": body,
+            "title": title,
+            "created_at": createdAt,
+            "closed_at": closedAt
+        ]
+        return (model: pullRequest, json: jsonObject.compactMapValues { $0 })
+    }
+    
+    private func makeItemJson(items: [[String: Any]]) -> Data {
+        let data = try! JSONSerialization.data(withJSONObject: items)
+        return data
     }
     
     private class HTTPClientSpy: HTTPClient {
