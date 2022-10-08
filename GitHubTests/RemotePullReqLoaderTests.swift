@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Alamofire
 @testable import GitHub
 
 class PullReqLoaderTests: XCTestCase {
