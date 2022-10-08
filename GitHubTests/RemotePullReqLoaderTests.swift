@@ -91,6 +91,21 @@ class PullReqLoaderTests: XCTestCase {
         })
     }
     
+    func test_load_doesNotDeliverResultAfterSUTDeallocated() {
+        let url = URL(string:"https://api.github.com/repos/apple/swift/pulls")!
+        let client = HTTPClientSpy()
+        var sut: RemotePullRequestLoader? = RemotePullRequestLoader(url: url, client: client)
+        
+        var captureResult = [RemotePullRequestLoader.Result]()
+        sut?.load {
+            captureResult.append($0)
+        }
+        sut = nil
+        let emptyListJson = makeItemJson(items: [])
+        client.complete(withStatusCode: 200, data: emptyListJson)
+        XCTAssertTrue(captureResult.isEmpty)
+    }
+    
     // MARK: Helpers
     
     private func expect(_ sut: RemotePullRequestLoader,
@@ -106,9 +121,11 @@ class PullReqLoaderTests: XCTestCase {
         XCTAssertEqual(captureResult, [result], file: file, line: line)
     }
     
-    private func makeSUT(url: URL = URL(string: "https://api.github.com")!) -> (sut: RemotePullRequestLoader, client: HTTPClientSpy) {
+    private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemotePullRequestLoader, client: HTTPClientSpy) {
         let client = HTTPClientSpy()
         let sut = RemotePullRequestLoader(url: url, client: client)
+        trackMemoryLeaks(instance: sut, file: file, line: line)
+        trackMemoryLeaks(instance: client, file: file, line: line)
         return (sut: sut, client: client)
     }
     
@@ -141,6 +158,12 @@ class PullReqLoaderTests: XCTestCase {
     private func makeItemJson(items: [[String: Any]]) -> Data {
         let data = try! JSONSerialization.data(withJSONObject: items)
         return data
+    }
+    
+    private func trackMemoryLeaks(instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock {[weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak found", file: file, line: line)
+        }
     }
     
     private class HTTPClientSpy: HTTPClient {

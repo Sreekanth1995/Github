@@ -23,6 +23,7 @@
 		C70721EF28F15A6E00844D21 /* RemotePullReqLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */; };
 		C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */; };
 		C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F328F1E93800844D21 /* HTTPClient.swift */; };
+		C70721F628F1E9AF00844D21 /* PullRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePullReqLoaderTests.swift; sourceTree = "<group>"; };
 		C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePullReqLoader.swift; sourceTree = "<group>"; };
 		C70721F328F1E93800844D21 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestMapper.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFC2BC1BF8861F0EECB5B5 /* Pods_GitHub_GitHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_GitHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */,
+				C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */,
 				C70721F328F1E93800844D21 /* HTTPClient.swift */,
 			);
 			path = PullReqApi;
@@ -462,6 +465,7 @@
 				C70721BD28EFFCCB00844D21 /* ViewController.swift in Sources */,
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
+				C70721F628F1E9AF00844D21 /* PullRequestMapper.swift in Sources */,
 				C70721EA28F07A0E00844D21 /* PullRequest.swift in Sources */,
 				C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */,
 			);
