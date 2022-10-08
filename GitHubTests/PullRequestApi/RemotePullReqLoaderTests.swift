@@ -191,9 +191,3 @@ class PullReqLoaderTests: XCTestCase {
         }
     }
 }
-
-
-
-
-
-

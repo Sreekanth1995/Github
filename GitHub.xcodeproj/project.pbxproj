@@ -10,7 +10,6 @@
 		16CFF3332F14C5402B235321 /* Pods_GitHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */; };
 		C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721B828EFFCCB00844D21 /* AppDelegate.swift */; };
 		C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */; };
-		C70721BD28EFFCCB00844D21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721BC28EFFCCB00844D21 /* ViewController.swift */; };
 		C70721C028EFFCCB00844D21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70721BE28EFFCCB00844D21 /* Main.storyboard */; };
 		C70721C228EFFCCD00844D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70721C128EFFCCD00844D21 /* Assets.xcassets */; };
 		C70721C528EFFCCD00844D21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */; };
@@ -45,7 +44,6 @@
 		C70721B528EFFCCB00844D21 /* GitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70721B828EFFCCB00844D21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C70721BC28EFFCCB00844D21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C70721BF28EFFCCB00844D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C70721C128EFFCCD00844D21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C70721C428EFFCCD00844D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 				C70721F028F166B500844D21 /* PullReqApi */,
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
 				C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */,
-				C70721BC28EFFCCB00844D21 /* ViewController.swift */,
 				C70721BE28EFFCCB00844D21 /* Main.storyboard */,
 				C70721C128EFFCCD00844D21 /* Assets.xcassets */,
 				C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */,
@@ -433,7 +430,6 @@
 			files = (
 				C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */,
 				C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */,
-				C70721BD28EFFCCB00844D21 /* ViewController.swift in Sources */,
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
 				C70721FD28F21E4A00844D21 /* AlamofireHTTPClient.swift in Sources */,
