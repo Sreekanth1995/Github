@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PullRequest: Codable {
+struct PullRequest: Codable, Equatable {
     let url: String?
     let id: Int?
     let node_id: String?

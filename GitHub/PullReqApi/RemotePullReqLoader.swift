@@ -21,9 +21,14 @@ final class RemotePullRequestLoader {
     private let client: HTTPClient
     private let url: URL
     
-    public enum Error: Swift.Error {
+    enum Error: Swift.Error {
         case connectivity
         case invalidData
+    }
+    
+    enum Result: Equatable {
+        case success([PullRequest])
+        case failure(Error)
     }
     
     init(url: URL, client: HTTPClient) {
