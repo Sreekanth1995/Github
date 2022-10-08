@@ -40,8 +40,8 @@ final class RemotePullRequestLoader {
         client.get(from: url, completion: { result in
             switch result {
             case .success(let data, let response):
-                if response.statusCode == 200, let json = try? JSONDecoder().decode([PullRequest].self, from: data) {
-                    completion(.success(json))
+                if response.statusCode == 200, let json = try? JSONDecoder().decode(Root.self, from: data) {
+                    completion(.success(json.map { $0.item }))
                 } else {
                     completion(.failure(.invalidData))
                 }
@@ -52,3 +52,23 @@ final class RemotePullRequestLoader {
     }
 }
 
+private typealias Root = [PullRequestObj]
+private struct PullRequestObj: Decodable {
+    let url: URL
+    let id: Int
+    let state: String
+    let title: String?
+    let created_at: String?
+    let closed_at: String?
+    let body: String?
+    
+    var item: PullRequest {
+        return PullRequest(id: id,
+                           url: url,
+                           state: state,
+                           body: body,
+                           title: title,
+                           createdAt: created_at,
+                           closedAt: closed_at)
+    }
+}

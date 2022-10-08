@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PullRequest: Codable, Equatable {
+struct PullRequest: Equatable {
     let url: URL
     let id: Int
     let state: String
@@ -15,16 +15,6 @@ struct PullRequest: Codable, Equatable {
     let createdAt: String?
     let closedAt: String?
     let body: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case url
-        case id
-        case state
-        case title
-        case body
-        case createdAt = "created_at"
-        case closedAt = "closed_at"
-    }
     
     init(id: Int,
          url: URL,
