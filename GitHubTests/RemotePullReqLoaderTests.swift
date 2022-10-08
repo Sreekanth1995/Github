@@ -52,9 +52,21 @@ class PullReqLoaderTests: XCTestCase {
             sut.load {
                 captureError.append($0)
             }
-            client.complete(with: code, at: index)
+            client.complete(withStatusCode: code, at: index)
             XCTAssertEqual(captureError, [.invalidData])
         }
+    }
+    
+    func test_load_deliversErrorOn200ResponseWithInvalidJSON() {
+        let url = URL(string: "https://api.github.com/repos/apple/swift/pulls?page=1&per_page=10")!
+        let (sut, client) = makeSUT(url: url)
+        var captureError = [RemotePullRequestLoader.Error]()
+        sut.load {
+            captureError.append($0)
+        }
+        let invalidJson = Data.init(bytes: "InvalidJSON".utf8)
+        client.complete(withStatusCode: 200, data: invalidJson)
+        XCTAssertEqual(captureError, [.invalidData])
     }
     
     // MARK: Helpers
@@ -78,12 +90,12 @@ class PullReqLoaderTests: XCTestCase {
             messages[index].completion(.failure(error))
         }
         
-        func complete(with statusCode: Int, at index: Int = 0) {
+        func complete(withStatusCode statusCode: Int, data: Data = Data(), at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index],
                                            statusCode: statusCode,
                                            httpVersion: nil,
                                            headerFields: nil)!
-            messages[index].completion(.success(response))
+            messages[index].completion(.success(data, response))
         }
     }
 }

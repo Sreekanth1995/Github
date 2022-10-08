@@ -8,7 +8,7 @@
 import Foundation
 
 enum HTTPClientResult {
-    case success(HTTPURLResponse)
+    case success(Data, HTTPURLResponse)
     case failure(Error)
 }
 
@@ -34,9 +34,9 @@ final class RemotePullRequestLoader {
     func load(completion: @escaping (Error) -> Void) {
         client.get(from: url, completion: { result in
             switch result {
-            case .success(let response):
+            case .success:
                 completion(.invalidData)
-            case .failure(let error):
+            case .failure:
                 completion(.connectivity)
             }
         })
