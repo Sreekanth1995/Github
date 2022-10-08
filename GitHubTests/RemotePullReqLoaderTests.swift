@@ -44,7 +44,8 @@ class PullReqLoaderTests: XCTestCase {
         let invalidStatusCodes = [199, 300, 400, 404, 500]
         invalidStatusCodes.enumerated().forEach { index, code in
             expect(sut, toCompleteWithResult: .failure(.invalidData), when: {
-                client.complete(withStatusCode: code, at: index)
+                let json = makeItemJson(items: [])
+                client.complete(withStatusCode: code, data: json, at: index)
             })
         }
     }

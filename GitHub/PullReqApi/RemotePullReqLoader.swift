@@ -39,8 +39,8 @@ final class RemotePullRequestLoader {
     func load(completion: @escaping (Result) -> Void) {
         client.get(from: url, completion: { result in
             switch result {
-            case .success(let data, let _):
-                if let json = try? JSONDecoder().decode([PullRequest].self, from: data) {
+            case .success(let data, let response):
+                if response.statusCode == 200, let json = try? JSONDecoder().decode([PullRequest].self, from: data) {
                     completion(.success(json))
                 } else {
                     completion(.failure(.invalidData))
