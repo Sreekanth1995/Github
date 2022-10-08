@@ -61,7 +61,7 @@ class PullReqLoaderTests: XCTestCase {
     func test_load_deliversNoItemsOn200ResponseWithEmptyJSONList() {
         let (sut, client) = makeSUT()
         expect(sut, toCompleteWithResult: .success([]), when: {
-            let emptyListJson = Data("[]".utf8)
+            let emptyListJson = makeItemJson(items: [])
             client.complete(withStatusCode: 200, data: emptyListJson)
         })
     }
