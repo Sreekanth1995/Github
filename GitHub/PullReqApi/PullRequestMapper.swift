@@ -31,13 +31,13 @@ internal final class PRItemsMapper {
     
     static func map(data: Data, response: HTTPURLResponse) -> RemotePullRequestLoader.Result {
         guard response.statusCode == 200 else {
-            return .failure(.invalidData)
+            return .failure(RemotePullRequestLoader.Error.invalidData)
         }
         do {
             let json = try JSONDecoder().decode(Root.self, from: data)
             return .success(json.map { $0.item })
         } catch {
-            return .failure(.invalidData)
+            return .failure(RemotePullRequestLoader.Error.invalidData)
         }
     }
 }

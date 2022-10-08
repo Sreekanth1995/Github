@@ -157,7 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				C70721CF28EFFCCD00844D21 /* GitHubTests.swift */,
-				C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */,
+				C70721F728F1F04C00844D21 /* PullRequestApi */,
 			);
 			path = GitHubTests;
 			sourceTree = "<group>";
@@ -188,6 +188,14 @@
 				C70721F328F1E93800844D21 /* HTTPClient.swift */,
 			);
 			path = PullReqApi;
+			sourceTree = "<group>";
+		};
+		C70721F728F1F04C00844D21 /* PullRequestApi */ = {
+			isa = PBXGroup;
+			children = (
+				C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */,
+			);
+			path = PullRequestApi;
 			sourceTree = "<group>";
 		};
 		F55D973B05D35622AB2B0A6B /* Pods */ = {

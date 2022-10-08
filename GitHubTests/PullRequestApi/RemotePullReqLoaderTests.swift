@@ -33,7 +33,7 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOnClientError() {
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWithResult: .failure(.connectivity), when: {
+        expect(sut, toCompleteWithResult: .failure(RemotePullRequestLoader.Error.connectivity), when: {
             let error = NSError(domain: "Test", code: 0)
             client.complete(with: error, at: 0)
         })
@@ -43,7 +43,7 @@ class PullReqLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         let invalidStatusCodes = [199, 300, 400, 404, 500]
         invalidStatusCodes.enumerated().forEach { index, code in
-            expect(sut, toCompleteWithResult: .failure(.invalidData), when: {
+            expect(sut, toCompleteWithResult: .failure(RemotePullRequestLoader.Error.invalidData), when: {
                 let json = makeItemJson(items: [])
                 client.complete(withStatusCode: code, data: json, at: index)
             })
@@ -52,7 +52,7 @@ class PullReqLoaderTests: XCTestCase {
     
     func test_load_deliversErrorOn200ResponseWithInvalidJSON() {
         let (sut, client) = makeSUT()
-        expect(sut, toCompleteWithResult: .failure(.invalidData), when: {
+        expect(sut, toCompleteWithResult: .failure(RemotePullRequestLoader.Error.invalidData), when: {
             let invalidJson = Data("InvalidJSON".utf8)
             client.complete(withStatusCode: 200, data: invalidJson)
         })
@@ -109,16 +109,24 @@ class PullReqLoaderTests: XCTestCase {
     // MARK: Helpers
     
     private func expect(_ sut: RemotePullRequestLoader,
-                        toCompleteWithResult result: RemotePullRequestLoader.Result,
+                        toCompleteWithResult expectedResult: RemotePullRequestLoader.Result,
                         when action: () -> Void,
                         file: StaticString = #file,
                         line: UInt = #line) {
-        var captureResult = [RemotePullRequestLoader.Result]()
-        sut.load {
-            captureResult.append($0)
+        let exp = expectation(description: "Wait for the load completion")
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedItems), .success(expectedItems)):
+                XCTAssertEqual(receivedItems, expectedItems, file: file, line: line)
+            case let (.failure(reveivedError as RemotePullRequestLoader.Error), .failure(expectedError as RemotePullRequestLoader.Error)):
+                XCTAssertEqual(reveivedError, expectedError, file: file, line: line)
+            default:
+                XCTFail("Expected result \(expectedResult) got \(receivedResult) instead", file: file, line: line)
+            }
+            exp.fulfill()
         }
         action()
-        XCTAssertEqual(captureResult, [result], file: file, line: line)
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: RemotePullRequestLoader, client: HTTPClientSpy) {
