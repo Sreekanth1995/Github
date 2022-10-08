@@ -17,12 +17,21 @@ class PullReqLoaderTests: XCTestCase {
         XCTAssertNil(client.requestedURL)
     }
     
-    func test_load_requestDataFromURL() {
+    func test_load_requestsDataFromURL() {
         let url = URL(string: "https://api.github.com/repos/apple/swift/pulls?page=1&per_page=10")!
         let client = HTTPClientSpy()
         let sut = RemotePullRequestLoader(url: url, client: client)
         sut.load()
         XCTAssertEqual(client.requestedURL, url)
+    }
+    
+    func test_load_requestsDataFromURLTwice() {
+        let url = URL(string: "https://api.github.com/repos/apple/swift/pulls?page=1&per_page=10")!
+        let client = HTTPClientSpy()
+        let sut = RemotePullRequestLoader(url: url, client: client)
+        sut.load()
+        sut.load()
+        XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
     // MARK: Helpers
@@ -36,9 +45,11 @@ class PullReqLoaderTests: XCTestCase {
     
     private class HTTPClientSpy: HTTPClient {
         var requestedURL: URL?
+        var requestedURLs = [URL]()
         
         func get(from url: URL) {
             requestedURL = url
+            requestedURLs.append(url)
         }
     }
 }
