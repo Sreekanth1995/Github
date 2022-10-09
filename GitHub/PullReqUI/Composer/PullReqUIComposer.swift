@@ -11,7 +11,7 @@ final class PullReqUIComposer {
     private init() { }
     
     public static func pullReqsCompose(with loader: PullRequestsLoader) -> PullsViewController {
-        let viewModel = PullRequestViewModel(loader: loader)
+        let viewModel = PullRequestViewModel(loader: MainQueueDispatchDecorator(loader))
         let refreshViewController = PullsRefreshViewController(viewModel: viewModel)
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle(for: PullsViewController.self))
         let viewController = storyBoard.instantiateInitialViewController() as! PullsViewController

@@ -52,6 +52,21 @@ final class PullsViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderItems(), 1)
     }
     
+    func test_loadPullsCompleteion_inBackgroundThread() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        let model = makeModel()
+        let exp = expectation(description: "Wait to complete completion in background thread")
+        DispatchQueue.global(qos: .background).async {
+            loader.completePullsLoading(with: [model], at: 0)
+            DispatchQueue.main.async {
+                exp.fulfill()
+            }
+        }
+        wait(for: [exp], timeout: 5.0)
+        XCTAssertEqual(sut.numberOfRenderItems(), 1)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: PullsViewController, loader: LoaderSpy) {

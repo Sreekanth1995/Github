@@ -32,6 +32,7 @@
 		C707222628F3001F00844D21 /* PullReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222528F3001E00844D21 /* PullReqViewModel.swift */; };
 		C707222928F318E000844D21 /* UITableView+ReUseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222828F318E000844D21 /* UITableView+ReUseCell.swift */; };
 		C707222B28F31A4C00844D21 /* UIImageView+Animated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */; };
+		C707222F28F3326400844D21 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		C707222528F3001E00844D21 /* PullReqViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqViewModel.swift; sourceTree = "<group>"; };
 		C707222828F318E000844D21 /* UITableView+ReUseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReUseCell.swift"; sourceTree = "<group>"; };
 		C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animated.swift"; sourceTree = "<group>"; };
+		C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFC2BC1BF8861F0EECB5B5 /* Pods_GitHub_GitHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_GitHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				C707222128F2F35A00844D21 /* PullReqUIComposer.swift */,
+				C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */,
 			);
 			path = Composer;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */,
 				C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */,
 				C707221C28F2E85100844D21 /* PullsRefreshViewController.swift in Sources */,
+				C707222F28F3326400844D21 /* MainQueueDispatchDecorator.swift in Sources */,
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C707220A28F2A97400844D21 /* PullsViewController.swift in Sources */,
 				C707222628F3001F00844D21 /* PullReqViewModel.swift in Sources */,
