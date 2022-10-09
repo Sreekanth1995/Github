@@ -11,12 +11,22 @@ import Alamofire
 class AlamofireHTTPClient: HTTPClient {
     private let session: Session
     
+    private struct UnexpectedValuesRepresentation: Error {}
+    private struct DataRequestTaskWrapper: HTTPClientTask {
+        let wrapped: DataRequest
+        
+        func cancel() {
+            wrapped.cancel()
+        }
+    }
+
+    
     init(session: Session = .default) {
         self.session = session
     }
     
-    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
-        session.request(url)
+    func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
+        let request = session.request(url)
             .responseData { dataResponse in
                 switch dataResponse.result {
                 case .success(let data):
@@ -25,6 +35,7 @@ class AlamofireHTTPClient: HTTPClient {
                     completion(HTTPClient.Result.failure(err))
                 }
             }
+        return DataRequestTaskWrapper(wrapped: request)
     }
 }
 

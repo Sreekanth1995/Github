@@ -9,7 +9,6 @@ import XCTest
 import UIKit
 @testable import GitHub
 
-
 final class PullsViewControllerTests: XCTestCase {
     
     func test_loadPullsActions_requestPullsFromLoader() {
@@ -71,7 +70,7 @@ final class PullsViewControllerTests: XCTestCase {
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: PullsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = PullReqUIComposer.pullReqsCompose(with: loader)
+        let sut = PullReqUIComposer.pullReqsCompose(with: loader, imageLoader: loader)
         trackMemoryLeaks(instance: sut, file: file, line: line)
         trackMemoryLeaks(instance: loader, file: file, line: line)
         return (sut: sut, loader: loader)
@@ -92,7 +91,7 @@ final class PullsViewControllerTests: XCTestCase {
     }
 
     
-    class LoaderSpy: PullRequestsLoader {
+    class LoaderSpy: PullRequestsLoader, UserImageDataLoader {
         
         var completions = [((PullRequestsLoader.Result) -> Void)]()
         var callCount: Int {
@@ -105,6 +104,41 @@ final class PullsViewControllerTests: XCTestCase {
         
         func completePullsLoading(with pulls:[PullRequest] = [], at index: Int) {
             completions[index](.success(pulls))
+        }
+        
+        func completeFetchingWithError(at index: Int = 0) {
+            let error = NSError(domain: "an error", code: 0)
+            completions[index](.failure(error))
+        }
+        
+        // MARK: UserImageDataLoader
+        private struct TaskSpy: UserImageDataLoaderTask {
+            let cancelCallback: () -> Void
+            func cancel() {
+                cancelCallback()
+            }
+        }
+        
+        private var imageRequests = [(url: URL, completion: (UserImageDataLoader.Result) -> Void)]()
+        
+        var loadedImageURLs: [URL] {
+            return imageRequests.map { $0.url }
+        }
+        
+        private(set) var cancelledImageURLs = [URL]()
+        
+        func loadImageData(from url: URL, completion: @escaping (UserImageDataLoader.Result) -> Void) -> UserImageDataLoaderTask {
+            imageRequests.append((url, completion))
+            return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
+        }
+        
+        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+            imageRequests[index].completion(.success(imageData))
+        }
+        
+        func completeImageLoadingWithError(at index: Int = 0) {
+            let error = NSError(domain: "an error", code: 0)
+            imageRequests[index].completion(.failure(error))
         }
     }
 }

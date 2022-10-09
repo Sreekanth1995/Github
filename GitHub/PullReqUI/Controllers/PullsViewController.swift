@@ -35,4 +35,23 @@ final class PullsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200
     }
+    
+    public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cancelCellControllerLoad(forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            tableModels[indexPath.row].preload()
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach(cancelCellControllerLoad)
+    }
+        
+    private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
+        tableModels[indexPath.row].cancelLoad()
+    }
+
 }

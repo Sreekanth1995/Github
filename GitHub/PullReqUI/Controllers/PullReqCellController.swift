@@ -8,22 +8,42 @@
 import UIKit
 
 final class PullReqCellController {
-    private let model: PullRequest
     private var cell: PullReqCell?
-    init(model: PullRequest) {
-        self.model = model
+    
+    private let viewModel: UserImageViewModel<UIImage>
+
+    init(viewModel: UserImageViewModel<UIImage>) {
+        self.viewModel = viewModel
     }
     
     func view(in tableView: UITableView) -> PullReqCell {
-        cell = tableView.dequeReusableCell()
+        cell = binded(tableView.dequeReusableCell())
         return cell!
     }
     
-    func display() {
-        cell?.titleLabel.text = model.title
-        cell?.closedAtLabel.text = model.closedAt
-        cell?.createdAtLabel.text = model.createdAt
-        cell?.userNameLabel.text = "Test"
-        cell?.userIconView.setImageViewAnimated(newImage: UIImage())
+    func preload() {
+        viewModel.loadImageData()
+    }
+    
+    func cancelLoad() {
+        viewModel.cancelImageDataLoad()
+    }
+    
+    private func binded(_ cell: PullReqCell) -> PullReqCell {
+        cell.repoNumberLabel.text = viewModel.repoName
+        cell.titleLabel.text = viewModel.title
+        cell.stateIcon.image = UIImage(named: viewModel.stateIcon)
+        cell.createdAtLabel.text = viewModel.createdAt
+        cell.closedAtLabel.text = viewModel.closedAt
+        cell.userNameLabel.text = viewModel.userName
+        
+        viewModel.onImageLoad = { [weak cell] image in
+            cell?.userIconView.image = image
+        }
+        
+        viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
+            cell?.userIconView.image = UIImage(named: "userIcon")
+        }
+        return cell
     }
 }

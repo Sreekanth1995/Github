@@ -33,6 +33,10 @@
 		C707222928F318E000844D21 /* UITableView+ReUseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222828F318E000844D21 /* UITableView+ReUseCell.swift */; };
 		C707222B28F31A4C00844D21 /* UIImageView+Animated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */; };
 		C707222F28F3326400844D21 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */; };
+		C707223128F33A9100844D21 /* UserImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223028F33A9100844D21 /* UserImageDataLoader.swift */; };
+		C707223328F33BD200844D21 /* RemoteUserImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223228F33BD200844D21 /* RemoteUserImageDataLoader.swift */; };
+		C707223528F345FB00844D21 /* UserImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223428F345FB00844D21 /* UserImageViewModel.swift */; };
+		C707223728F349A900844D21 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223628F349A900844D21 /* StringExtension.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +95,10 @@
 		C707222828F318E000844D21 /* UITableView+ReUseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReUseCell.swift"; sourceTree = "<group>"; };
 		C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animated.swift"; sourceTree = "<group>"; };
 		C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
+		C707223028F33A9100844D21 /* UserImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageDataLoader.swift; sourceTree = "<group>"; };
+		C707223228F33BD200844D21 /* RemoteUserImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserImageDataLoader.swift; sourceTree = "<group>"; };
+		C707223428F345FB00844D21 /* UserImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageViewModel.swift; sourceTree = "<group>"; };
+		C707223628F349A900844D21 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFC2BC1BF8861F0EECB5B5 /* Pods_GitHub_GitHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_GitHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +184,7 @@
 				C707221A28F2E2CC00844D21 /* PullReqUI */,
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
 				C70721BA28EFFCCB00844D21 /* SceneDelegate.swift */,
+				C707223628F349A900844D21 /* StringExtension.swift */,
 				C70721BE28EFFCCB00844D21 /* Main.storyboard */,
 				C70721C128EFFCCD00844D21 /* Assets.xcassets */,
 				C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */,
@@ -207,6 +216,7 @@
 			children = (
 				C70721E928F07A0E00844D21 /* PullRequest.swift */,
 				C70721EB28F07BB800844D21 /* PullsLoader.swift */,
+				C707223028F33A9100844D21 /* UserImageDataLoader.swift */,
 			);
 			path = PullReqFeature;
 			sourceTree = "<group>";
@@ -215,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */,
+				C707223228F33BD200844D21 /* RemoteUserImageDataLoader.swift */,
 				C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */,
 				C70721F328F1E93800844D21 /* HTTPClient.swift */,
 				C70721FC28F21E4A00844D21 /* AlamofireHTTPClient.swift */,
@@ -291,6 +302,7 @@
 			isa = PBXGroup;
 			children = (
 				C707222528F3001E00844D21 /* PullReqViewModel.swift */,
+				C707223428F345FB00844D21 /* UserImageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -555,10 +567,12 @@
 				C707222928F318E000844D21 /* UITableView+ReUseCell.swift in Sources */,
 				C707222228F2F35A00844D21 /* PullReqUIComposer.swift in Sources */,
 				C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */,
+				C707223328F33BD200844D21 /* RemoteUserImageDataLoader.swift in Sources */,
 				C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */,
 				C707221C28F2E85100844D21 /* PullsRefreshViewController.swift in Sources */,
 				C707222F28F3326400844D21 /* MainQueueDispatchDecorator.swift in Sources */,
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
+				C707223728F349A900844D21 /* StringExtension.swift in Sources */,
 				C707220A28F2A97400844D21 /* PullsViewController.swift in Sources */,
 				C707222628F3001F00844D21 /* PullReqViewModel.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
@@ -567,6 +581,8 @@
 				C70721F628F1E9AF00844D21 /* PullRequestMapper.swift in Sources */,
 				C70721EA28F07A0E00844D21 /* PullRequest.swift in Sources */,
 				C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */,
+				C707223128F33A9100844D21 /* UserImageDataLoader.swift in Sources */,
+				C707223528F345FB00844D21 /* UserImageViewModel.swift in Sources */,
 				C707220C28F2AB3300844D21 /* PullReqCell.swift in Sources */,
 				C707222B28F31A4C00844D21 /* UIImageView+Animated.swift in Sources */,
 			);

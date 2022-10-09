@@ -44,16 +44,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C70721D428EFFCCD00844D21"
-               BuildableName = "GitHubUITests.xctest"
-               BlueprintName = "GitHubUITests"
-               ReferencedContainer = "container:GitHub.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C707221028F2C17000844D21"
                BuildableName = "GitHubiOSTests.xctest"
                BlueprintName = "GitHubiOSTests"
