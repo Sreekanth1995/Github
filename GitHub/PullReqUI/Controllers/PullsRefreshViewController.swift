@@ -5,7 +5,7 @@
 //  Created by M sreekanth  on 09/10/22.
 //
 
-import Foundation
+import UIKit
 
 final class PullsRefreshViewController: NSObject {
     private(set) lazy var view: UIRefreshControl = {

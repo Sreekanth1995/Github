@@ -56,7 +56,7 @@ final class PullsViewControllerTests: XCTestCase {
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: PullsViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = PullsViewController(loader: loader)
+        let sut = PullReqUIComposer.pullReqsCompose(with: loader)
         trackMemoryLeaks(instance: sut, file: file, line: line)
         trackMemoryLeaks(instance: loader, file: file, line: line)
         return (sut: sut, loader: loader)
@@ -88,7 +88,6 @@ final class PullsViewControllerTests: XCTestCase {
             completions[index](.success(pulls))
         }
     }
-    
 }
 
 extension PullsViewController {

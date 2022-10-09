@@ -7,34 +7,22 @@
 
 import UIKit
 
-struct PullReqViewModel {
-    let repoName: String
-    let stateIcon: String
-    let userImage: String
-    let title: String
-    let createdAt: String
-    let closedAt: String?
-}
-
-
-class PullsViewController: UITableViewController {
-    
+final class PullsViewController: UITableViewController {
     var refreshController: PullsRefreshViewController
-    var tableModels = [PullRequest]()
+    var tableModels = [PullReqCellController]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
-    init(loader: PullRequestsLoader) {
-        self.refreshController = PullsRefreshViewController(loader: loader)
+    init(refreshController: PullsRefreshViewController) {
+        self.refreshController = refreshController
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = refreshController.view
-        refreshController.onRefresh = {[weak self] items in
-            guard let self = self else { return }
-            self.tableModels = items
-            self.tableView.reloadData()
-        }
         refreshController.refresh()
     }
     
@@ -49,9 +37,8 @@ class PullsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PullReqCell", for: indexPath) as! PullReqCell
-        
-        return cell
+        let cellController = tableModels[indexPath.row]
+        return cellController.view()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
