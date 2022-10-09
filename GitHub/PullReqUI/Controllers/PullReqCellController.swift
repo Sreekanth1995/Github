@@ -24,5 +24,6 @@ final class PullReqCellController {
         cell?.closedAtLabel.text = model.closedAt
         cell?.createdAtLabel.text = model.createdAt
         cell?.userNameLabel.text = "Test"
+        cell?.userIconView.setImageViewAnimated(newImage: UIImage())
     }
 }
