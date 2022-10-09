@@ -26,6 +26,7 @@
 		C707220A28F2A97400844D21 /* PullsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707220928F2A97400844D21 /* PullsViewController.swift */; };
 		C707220C28F2AB3300844D21 /* PullReqCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707220B28F2AB3300844D21 /* PullReqCell.swift */; };
 		C707221428F2C17100844D21 /* GitHubiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707221328F2C17100844D21 /* GitHubiOSTests.swift */; };
+		C707221C28F2E85100844D21 /* PullsRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707221B28F2E85100844D21 /* PullsRefreshViewController.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		C707220B28F2AB3300844D21 /* PullReqCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqCell.swift; sourceTree = "<group>"; };
 		C707221128F2C17000844D21 /* GitHubiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C707221328F2C17100844D21 /* GitHubiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubiOSTests.swift; sourceTree = "<group>"; };
+		C707221B28F2E85100844D21 /* PullsRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsRefreshViewController.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFC2BC1BF8861F0EECB5B5 /* Pods_GitHub_GitHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_GitHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,7 +159,7 @@
 		C70721B728EFFCCB00844D21 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
-				C70721ED28F07D3F00844D21 /* PullRequestsFeature */,
+				C70721ED28F07D3F00844D21 /* PullReqFeature */,
 				C70721F028F166B500844D21 /* PullReqApi */,
 				C707221A28F2E2CC00844D21 /* PullReqUI */,
 				C70721B828EFFCCB00844D21 /* AppDelegate.swift */,
@@ -188,13 +190,13 @@
 			path = GitHubUITests;
 			sourceTree = "<group>";
 		};
-		C70721ED28F07D3F00844D21 /* PullRequestsFeature */ = {
+		C70721ED28F07D3F00844D21 /* PullReqFeature */ = {
 			isa = PBXGroup;
 			children = (
 				C70721E928F07A0E00844D21 /* PullRequest.swift */,
 				C70721EB28F07BB800844D21 /* PullsLoader.swift */,
 			);
-			path = PullRequestsFeature;
+			path = PullReqFeature;
 			sourceTree = "<group>";
 		};
 		C70721F028F166B500844D21 /* PullReqApi */ = {
@@ -236,10 +238,19 @@
 		C707221A28F2E2CC00844D21 /* PullReqUI */ = {
 			isa = PBXGroup;
 			children = (
-				C707220928F2A97400844D21 /* PullsViewController.swift */,
+				C707221E28F2E87000844D21 /* Controllers */,
 				C707220B28F2AB3300844D21 /* PullReqCell.swift */,
 			);
 			path = PullReqUI;
+			sourceTree = "<group>";
+		};
+		C707221E28F2E87000844D21 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C707220928F2A97400844D21 /* PullsViewController.swift */,
+				C707221B28F2E85100844D21 /* PullsRefreshViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		F55D973B05D35622AB2B0A6B /* Pods */ = {
@@ -501,6 +512,7 @@
 			files = (
 				C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */,
 				C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */,
+				C707221C28F2E85100844D21 /* PullsRefreshViewController.swift in Sources */,
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C707220A28F2A97400844D21 /* PullsViewController.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,

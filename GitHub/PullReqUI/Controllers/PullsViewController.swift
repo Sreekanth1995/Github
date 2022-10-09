@@ -16,31 +16,36 @@ struct PullReqViewModel {
     let closedAt: String?
 }
 
-class PullsViewController: UITableViewController {
 
-    var pulls = [PullReqViewModel]()
+class PullsViewController: UITableViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refresh()
-        tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+    var refreshController: PullsRefreshViewController
+    var tableModels = [PullRequest]()
+    
+    init(loader: PullRequestsLoader) {
+        self.refreshController = PullsRefreshViewController(loader: loader)
+        super.init(nibName: nil, bundle: nil)
     }
     
-    @IBAction func refresh() {
-        refreshControl?.beginRefreshing()
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        refreshControl = refreshController.view
+        refreshController.onRefresh = {[weak self] items in
+            guard let self = self else { return }
+            self.tableModels = items
+            self.tableView.reloadData()
+        }
+        refreshController.refresh()
     }
     
-    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tableModels.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
