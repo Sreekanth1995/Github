@@ -19,11 +19,12 @@ final class PullsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        loader.load() { _ in }
+        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        refreshControl?.beginRefreshing()
+        loadData()
     }
     
-    @objc func refreshAction() {
+    @objc func loadData() {
         loader.load() { _ in }
     }
     
@@ -54,6 +55,12 @@ final class PullsViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.callCount, 2)
         sut.refreshControl?.simulatePullToRefresh()
         XCTAssertEqual(loader.callCount, 3)
+    }
+    
+    func test_viewdidLoad_showLoadingIndicator() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
     }
     
     // MARK: - Helpers
