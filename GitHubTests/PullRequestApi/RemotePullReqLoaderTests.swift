@@ -70,19 +70,27 @@ class PullReqLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
         let obj1 = makeItem(id: 1076581210,
                             url: URL(string:"https://api.github.com/repos/apple/swift/pulls/61443")!,
+                            number: 60132,
                             state: "open",
                             body: "When an anonymous enum is imported",
                             title: "Respect NS_REFINED_FOR_SWIFT importing anon enums",
                             createdAt: "2022-10-04T22:41:36Z",
-                            closedAt: nil)
+                            closedAt: nil,
+                            userName: "tshortli",
+                            userImage: URL(string: "https://avatars.githubusercontent.com/u/16380168?v=4"),
+                            repo: "apple/swift")
         
         let obj2 = makeItem(id: 1077335864,
                             url: URL(string: "https://api.github.com/repos/apple/swift/pulls/61447")!,
+                            number: 32133,
                             state: "closed",
                             body: "They fail on arm64e on some bots.\r\n\r\nrdar://100805115",
                             title: "Disable Reflection/typeref_decoding(_asan).swift tests",
                             createdAt: "2022-10-05T13:22:32Z",
-                            closedAt: "2022-10-05T13:24:39Z")
+                            closedAt: "2022-10-05T13:24:39Z",
+                            userName: "tshortli",
+                            userImage: URL(string: "https://avatars.githubusercontent.com/u/16380168?v=4"),
+                            repo: "apple/swift")
         let array = [obj1.json, obj2.json]
         let items = [obj1.model, obj2.model]
         expect(sut, toCompleteWithResult: .success(items), when: {
@@ -139,26 +147,51 @@ class PullReqLoaderTests: XCTestCase {
     
     private func makeItem(id: Int,
                           url: URL,
+                          number: Int,
                           state: String,
                           body: String?,
                           title: String?,
                           createdAt: String?,
-                          closedAt: String?) -> (model: PullRequest, json: [String: Any]) {
+                          closedAt: String?,
+                          userName: String?,
+                          userImage: URL?,
+                          repo: String?) -> (model: PullRequest, json: [String: Any]) {
         let pullRequest = PullRequest(id: id,
                                       url: url,
+                                      number: number,
                                       state: state,
                                       body: body,
                                       title: title,
                                       createdAt: createdAt,
-                                      closedAt: closedAt)
+                                      closedAt: closedAt,
+                                      userName: userName,
+                                      userImage: userImage,
+                                      repo: repo)
+        
+        let userObj: [String: Any] = [
+            "login": userName,
+            "avatar_url": userImage?.absoluteString
+        ].compactMapValues { $0 }
+        
+        let repoObj: [String: Any] = [
+            "full_name": repo
+        ].compactMapValues { $0 }
+        
+        let baseObj: [String: Any] = [
+            "repo": repoObj
+        ].compactMapValues { $0 }
+
         let jsonObject: [String: Any?] = [
             "id": id,
             "url": url.absoluteString,
+            "number": number,
             "state": state,
             "body": body,
             "title": title,
             "created_at": createdAt,
-            "closed_at": closedAt
+            "closed_at": closedAt,
+            "base": baseObj,
+            "user": userObj
         ]
         return (model: pullRequest, json: jsonObject.compactMapValues { $0 })
     }

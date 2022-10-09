@@ -65,11 +65,15 @@ final class PullsViewControllerTests: XCTestCase {
     private func makeModel() -> PullRequest {
         return PullRequest(id: 1080926538,
                            url: URL(string: "https://api.github.com/repos/apple/swift/pulls/61503")!,
+                           number: 30332,
                            state: "closed",
                            body: "The initial implementation of SILGen for `if #_hasSymbol` will assume it is targeting Darwin so we should diagnose attempts to use the feature on other platforms.",
                            title: "Sema: Diagnose `if #_hasSymbol` as unsupported on non-Darwin targets",
                            createdAt: "2022-10-08T05:19:34Z",
-                           closedAt: "2022-10-09T01:14:54Z")
+                           closedAt: "2022-10-09T01:14:54Z",
+                           userName: "tshortli",
+                           userImage: URL(string: "https://avatars.githubusercontent.com/u/16380168?v=4"),
+                           repo: "apple/swift")
     }
 
     
