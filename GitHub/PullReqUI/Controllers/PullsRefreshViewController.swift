@@ -8,31 +8,28 @@
 import UIKit
 
 final class PullsRefreshViewController: NSObject {
-    private(set) lazy var view: UIRefreshControl = {
-        let view = UIRefreshControl()
-        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        return view
-    }()
+    private(set) lazy var view: UIRefreshControl = binded(view: UIRefreshControl())
+    let viewModel: PullRequestViewModel
     
-    let loader: PullRequestsLoader
-    var onRefresh: (([PullRequest]) -> Void)?
-    
-    init(loader: PullRequestsLoader) {
-        self.loader = loader
+    init(viewModel: PullRequestViewModel) {
+        self.viewModel = viewModel
     }
     
     @objc func refresh() {
-        view.beginRefreshing()
-        loader.load() {[weak self] result in
+        viewModel.loadPullRequests()
+    }
+    
+    private func binded(view: UIRefreshControl) -> UIRefreshControl {
+        viewModel.onChange = {[weak self] viewModel in
             guard let self = self else { return }
-            self.view.endRefreshing()
-            switch result {
-            case .success(let pulls):
-                self.onRefresh?(pulls)
-            case .failure(let error):
-                break
+            if viewModel.isLoading {
+                self.view.beginRefreshing()
+            } else {
+                self.view.endRefreshing()
             }
         }
+        view.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return view
     }
 }
 

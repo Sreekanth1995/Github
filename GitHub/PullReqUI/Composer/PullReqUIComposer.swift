@@ -11,9 +11,10 @@ final class PullReqUIComposer {
     private init() { }
     
     public static func pullReqsCompose(with loader: PullRequestsLoader) -> PullsViewController {
-        let refreshViewController = PullsRefreshViewController(loader: loader)
+        let viewModel = PullRequestViewModel(loader: loader)
+        let refreshViewController = PullsRefreshViewController(viewModel: viewModel)
         let viewController = PullsViewController(refreshController: refreshViewController)
-        refreshViewController.onRefresh = adaptPullRequestToCellControllers(viewController: viewController)
+        viewModel.onPullReqsLoad = adaptPullRequestToCellControllers(viewController: viewController)
         return viewController
     }
     
