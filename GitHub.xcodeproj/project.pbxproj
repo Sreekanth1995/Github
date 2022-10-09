@@ -29,13 +29,13 @@
 		C707221C28F2E85100844D21 /* PullsRefreshViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707221B28F2E85100844D21 /* PullsRefreshViewController.swift */; };
 		C707222028F2ED7100844D21 /* PullReqCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707221F28F2ED7100844D21 /* PullReqCellController.swift */; };
 		C707222228F2F35A00844D21 /* PullReqUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222128F2F35A00844D21 /* PullReqUIComposer.swift */; };
-		C707222628F3001F00844D21 /* PullReqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222528F3001E00844D21 /* PullReqViewModel.swift */; };
+		C707222628F3001F00844D21 /* PullReqsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222528F3001E00844D21 /* PullReqsViewModel.swift */; };
 		C707222928F318E000844D21 /* UITableView+ReUseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222828F318E000844D21 /* UITableView+ReUseCell.swift */; };
 		C707222B28F31A4C00844D21 /* UIImageView+Animated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */; };
 		C707222F28F3326400844D21 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */; };
 		C707223128F33A9100844D21 /* UserImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223028F33A9100844D21 /* UserImageDataLoader.swift */; };
 		C707223328F33BD200844D21 /* RemoteUserImageDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223228F33BD200844D21 /* RemoteUserImageDataLoader.swift */; };
-		C707223528F345FB00844D21 /* UserImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223428F345FB00844D21 /* UserImageViewModel.swift */; };
+		C707223528F345FB00844D21 /* PullViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223428F345FB00844D21 /* PullViewModel.swift */; };
 		C707223728F349A900844D21 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707223628F349A900844D21 /* StringExtension.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
@@ -91,13 +91,13 @@
 		C707221B28F2E85100844D21 /* PullsRefreshViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsRefreshViewController.swift; sourceTree = "<group>"; };
 		C707221F28F2ED7100844D21 /* PullReqCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqCellController.swift; sourceTree = "<group>"; };
 		C707222128F2F35A00844D21 /* PullReqUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqUIComposer.swift; sourceTree = "<group>"; };
-		C707222528F3001E00844D21 /* PullReqViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqViewModel.swift; sourceTree = "<group>"; };
+		C707222528F3001E00844D21 /* PullReqsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullReqsViewModel.swift; sourceTree = "<group>"; };
 		C707222828F318E000844D21 /* UITableView+ReUseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReUseCell.swift"; sourceTree = "<group>"; };
 		C707222A28F31A4C00844D21 /* UIImageView+Animated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animated.swift"; sourceTree = "<group>"; };
 		C707222E28F3326400844D21 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
 		C707223028F33A9100844D21 /* UserImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageDataLoader.swift; sourceTree = "<group>"; };
 		C707223228F33BD200844D21 /* RemoteUserImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUserImageDataLoader.swift; sourceTree = "<group>"; };
-		C707223428F345FB00844D21 /* UserImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserImageViewModel.swift; sourceTree = "<group>"; };
+		C707223428F345FB00844D21 /* PullViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullViewModel.swift; sourceTree = "<group>"; };
 		C707223628F349A900844D21 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,8 +301,8 @@
 		C707222728F3003E00844D21 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				C707222528F3001E00844D21 /* PullReqViewModel.swift */,
-				C707223428F345FB00844D21 /* UserImageViewModel.swift */,
+				C707222528F3001E00844D21 /* PullReqsViewModel.swift */,
+				C707223428F345FB00844D21 /* PullViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -574,7 +574,7 @@
 				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C707223728F349A900844D21 /* StringExtension.swift in Sources */,
 				C707220A28F2A97400844D21 /* PullsViewController.swift in Sources */,
-				C707222628F3001F00844D21 /* PullReqViewModel.swift in Sources */,
+				C707222628F3001F00844D21 /* PullReqsViewModel.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
 				C70721FD28F21E4A00844D21 /* AlamofireHTTPClient.swift in Sources */,
 				C707222028F2ED7100844D21 /* PullReqCellController.swift in Sources */,
@@ -582,7 +582,7 @@
 				C70721EA28F07A0E00844D21 /* PullRequest.swift in Sources */,
 				C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */,
 				C707223128F33A9100844D21 /* UserImageDataLoader.swift in Sources */,
-				C707223528F345FB00844D21 /* UserImageViewModel.swift in Sources */,
+				C707223528F345FB00844D21 /* PullViewModel.swift in Sources */,
 				C707220C28F2AB3300844D21 /* PullReqCell.swift in Sources */,
 				C707222B28F31A4C00844D21 /* UIImageView+Animated.swift in Sources */,
 			);

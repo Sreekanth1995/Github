@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PullRequestViewModel {
+class PullRequestsViewModel {
     typealias Observer<T> = (T) -> Void
     private let loader: PullRequestsLoader
     
@@ -19,6 +19,9 @@ class PullRequestViewModel {
     
     var onChange: Observer<Bool>?
     var onPullReqsLoad: Observer<[PullRequest]>?
+    var title: String {
+        "Pull Requests"
+    }
     
     init(loader: PullRequestsLoader) {
         self.loader = loader

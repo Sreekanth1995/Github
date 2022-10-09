@@ -9,9 +9,9 @@ import UIKit
 
 final class PullsRefreshViewController: NSObject {
     private(set) lazy var view: UIRefreshControl = binded(view: UIRefreshControl())
-    let viewModel: PullRequestViewModel
+    let viewModel: PullRequestsViewModel
     
-    init(viewModel: PullRequestViewModel) {
+    init(viewModel: PullRequestsViewModel) {
         self.viewModel = viewModel
     }
     

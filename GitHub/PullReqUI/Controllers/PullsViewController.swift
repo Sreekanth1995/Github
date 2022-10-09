@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PullsViewController: UITableViewController {
+final class PullsViewController: UITableViewController, UITableViewDataSourcePrefetching {
     var refreshController: PullsRefreshViewController?
     var tableModels = [PullReqCellController]() {
         didSet {
@@ -17,6 +17,8 @@ final class PullsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = refreshController?.viewModel.title
+        tableView.prefetchDataSource = self
         refreshControl = refreshController?.view
         refreshController?.refresh()
     }
@@ -53,5 +55,4 @@ final class PullsViewController: UITableViewController {
     private func cancelCellControllerLoad(forRowAt indexPath: IndexPath) {
         tableModels[indexPath.row].cancelLoad()
     }
-
 }

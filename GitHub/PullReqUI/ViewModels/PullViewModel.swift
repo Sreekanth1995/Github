@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class UserImageViewModel<Image> {
+final class PullViewModel<Image> {
     enum State: String {
         case open
         case closed
@@ -19,6 +19,7 @@ final class UserImageViewModel<Image> {
     private let model: PullRequest
     private let imageLoader: UserImageDataLoader
     private let imageTransformer: (Data) -> Image?
+    private var userImageData: Data?
     
     init(model: PullRequest, imageLoader: UserImageDataLoader, imageTransformer: @escaping (Data) -> Image?) {
         self.model = model
@@ -59,13 +60,18 @@ final class UserImageViewModel<Image> {
     func loadImageData() {
         onImageLoadingStateChange?(true)
         onShouldRetryImageLoadStateChange?(false)
-        task = imageLoader.loadImageData(from: model.url) { [weak self] result in
-            self?.handle(result)
+        if let data = userImageData, let image = imageTransformer(data) {
+            onImageLoad?(image)
+        } else {
+            task = imageLoader.loadImageData(from: model.url) { [weak self] result in
+                self?.handle(result)
+            }
         }
     }
     
     private func handle(_ result: UserImageDataLoader.Result) {
-        if let image = (try? result.get()).flatMap(imageTransformer) {
+        if let data = try? result.get(), let image = imageTransformer(data) {
+            userImageData = data
             onImageLoad?(image)
         } else {
             onShouldRetryImageLoadStateChange?(true)

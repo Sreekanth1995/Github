@@ -44,15 +44,20 @@ final class RemoteUserImageDataLoader: UserImageDataLoader {
     
     public func loadImageData(from url: URL, completion: @escaping (UserImageDataLoader.Result) -> Void) -> UserImageDataLoaderTask {
         let task = HTTPClientTaskWrapper(completion)
-        task.wrapped = client.get(from: url) { [weak self] result in
-            guard self != nil else { return }
-            
-            task.complete(with: result
-                .mapError { _ in Error.connectivity }
-                .flatMap { (data, response) in
-                    let isValidResponse = response.isOK && !data.isEmpty
-                    return isValidResponse ? .success(data) : .failure(Error.invalidData)
-                })
+        DispatchQueue.global(qos: .utility).async {[weak self] in
+            if let data = try? Data(contentsOf: url) {
+                task.complete(with: .success(data))
+            } else {
+                task.wrapped = self?.client.get(from: url) { [weak self] result in
+                    guard self != nil else { return }
+                    task.complete(with: result
+                        .mapError { _ in Error.connectivity }
+                        .flatMap { (data, response) in
+                            let isValidResponse = response.isOK && !data.isEmpty
+                            return isValidResponse ? .success(data) : .failure(Error.invalidData)
+                        })
+                }
+            }
         }
         return task
     }

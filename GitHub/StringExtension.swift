@@ -19,11 +19,11 @@ extension String {
 extension Date {
     
     static var backendFormat: String {
-        return "yyyy-MM-ddThh:mm:ssZ"
+        return "yyyy-MM-dd'T'HH:mm:ssZ"
     }
     
     static var appFormat: String {
-        return "dd MMM"
+        return "MMM d, h:mm a"
     }
     
     func toString(formate: String) -> String {

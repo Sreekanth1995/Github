@@ -10,14 +10,15 @@ import UIKit
 final class PullReqCellController {
     private var cell: PullReqCell?
     
-    private let viewModel: UserImageViewModel<UIImage>
+    private let viewModel: PullViewModel<UIImage>
 
-    init(viewModel: UserImageViewModel<UIImage>) {
+    init(viewModel: PullViewModel<UIImage>) {
         self.viewModel = viewModel
     }
     
     func view(in tableView: UITableView) -> PullReqCell {
         cell = binded(tableView.dequeReusableCell())
+        viewModel.loadImageData()
         return cell!
     }
     
@@ -26,6 +27,7 @@ final class PullReqCellController {
     }
     
     func cancelLoad() {
+        cell = nil
         viewModel.cancelImageDataLoad()
     }
     
@@ -42,7 +44,9 @@ final class PullReqCellController {
         }
         
         viewModel.onImageLoadingStateChange = { [weak cell] isLoading in
-            cell?.userIconView.image = UIImage(named: "userIcon")
+            if isLoading {
+                cell?.userIconView.image = UIImage(named: "userIcon")
+            }
         }
         return cell
     }

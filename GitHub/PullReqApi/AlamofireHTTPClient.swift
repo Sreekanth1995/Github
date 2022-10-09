@@ -20,7 +20,6 @@ class AlamofireHTTPClient: HTTPClient {
         }
     }
 
-    
     init(session: Session = .default) {
         self.session = session
     }
