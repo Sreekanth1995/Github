@@ -49,6 +49,7 @@
 		C70721D528EFFCCD00844D21 /* GitHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70721D928EFFCCD00844D21 /* GitHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITests.swift; sourceTree = "<group>"; };
 		C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C70721E828F0465700844D21 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 		C70721AC28EFFCCB00844D21 = {
 			isa = PBXGroup;
 			children = (
+				C70721E828F0465700844D21 /* README.md */,
 				C70721B728EFFCCB00844D21 /* GitHub */,
 				C70721CE28EFFCCD00844D21 /* GitHubTests */,
 				C70721D828EFFCCD00844D21 /* GitHubUITests */,
