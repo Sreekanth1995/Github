@@ -19,19 +19,21 @@ final class PullsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
-        refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        refreshControl?.addTarget(self, action: #selector(loadPulls), for: .valueChanged)
         refreshControl?.beginRefreshing()
-        loadData()
+        loadPulls()
     }
     
-    @objc func loadData() {
-        loader.load() { _ in }
+    @objc func loadPulls() {
+        loader.load() {[weak self] _ in
+            guard let self = self else { return }
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 
 
@@ -48,7 +50,7 @@ final class PullsViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.callCount, 1)
     }
     
-    func test_pullsToRefresh_loadData() {
+    func test_pullsToRefresh_loadPulls() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
         sut.refreshControl?.simulatePullToRefresh()
@@ -58,9 +60,16 @@ final class PullsViewControllerTests: XCTestCase {
     }
     
     func test_viewdidLoad_showLoadingIndicator() {
-        let (sut, loader) = makeSUT()
+        let (sut, _) = makeSUT()
         sut.loadViewIfNeeded()
         XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
+    }
+    
+    func test_viewdidLoad_hidesLoadingIndicatorOnPullsLoad() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        loader.completePullsLoading()
+        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
     }
     
     // MARK: - Helpers
@@ -75,10 +84,18 @@ final class PullsViewControllerTests: XCTestCase {
 
     
     class LoaderSpy: PullRequestsLoader {
-        private(set) var callCount: Int = 0
         
-        func load(_ completion: @escaping (Result<[PullRequest], Error>) -> Void) {
-            callCount += 1
+        var completions = [((PullRequestsLoader.Result) -> Void)]()
+        var callCount: Int {
+            return completions.count
+        }
+        
+        func load(_ completion: @escaping (PullRequestsLoader.Result) -> Void) {
+            completions.append(completion)
+        }
+        
+        func completePullsLoading() {
+            completions[0](.success([]))
         }
     }
     
