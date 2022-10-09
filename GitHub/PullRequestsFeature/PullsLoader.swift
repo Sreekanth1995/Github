@@ -12,6 +12,6 @@ enum LoadPullRequestsResult {
     case failure(Error)
 }
 
-protocol PullsLoader {
-    func loadPull(_ completion: @escaping (LoadPullRequestsResult) -> Void)
+protocol PullRequestsLoader {
+    func load(_ completion: @escaping (LoadPullRequestsResult) -> Void)
 }

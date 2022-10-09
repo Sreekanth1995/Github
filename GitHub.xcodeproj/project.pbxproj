@@ -15,13 +15,17 @@
 		C70721C028EFFCCB00844D21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70721BE28EFFCCB00844D21 /* Main.storyboard */; };
 		C70721C228EFFCCD00844D21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C70721C128EFFCCD00844D21 /* Assets.xcassets */; };
 		C70721C528EFFCCD00844D21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C70721C328EFFCCD00844D21 /* LaunchScreen.storyboard */; };
-		C70721D028EFFCCD00844D21 /* GitHubTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721CF28EFFCCD00844D21 /* GitHubTests.swift */; };
 		C70721DA28EFFCCD00844D21 /* GitHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721D928EFFCCD00844D21 /* GitHubUITests.swift */; };
 		C70721DC28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */; };
 		C70721EA28F07A0E00844D21 /* PullRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721E928F07A0E00844D21 /* PullRequest.swift */; };
 		C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721EB28F07BB800844D21 /* PullsLoader.swift */; };
 		C70721EF28F15A6E00844D21 /* RemotePullReqLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */; };
 		C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */; };
+		C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F328F1E93800844D21 /* HTTPClient.swift */; };
+		C70721F628F1E9AF00844D21 /* PullRequestMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */; };
+		C70721F928F1F90600844D21 /* AlamofireHttpClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721F828F1F90600844D21 /* AlamofireHttpClientTests.swift */; };
+		C70721FB28F206A900844D21 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721FA28F206A900844D21 /* XCTestCase+MemoryLeakTracking.swift */; };
+		C70721FD28F21E4A00844D21 /* AlamofireHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70721FC28F21E4A00844D21 /* AlamofireHTTPClient.swift */; };
 		E004CC03743EF9D43CEB392A /* Pods_GitHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097FF795BE32BBE0F335F0D7 /* Pods_GitHub.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +60,6 @@
 		C70721C428EFFCCD00844D21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C70721C628EFFCCD00844D21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C70721CB28EFFCCD00844D21 /* GitHubTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C70721CF28EFFCCD00844D21 /* GitHubTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTests.swift; sourceTree = "<group>"; };
 		C70721D528EFFCCD00844D21 /* GitHubUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70721D928EFFCCD00844D21 /* GitHubUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITests.swift; sourceTree = "<group>"; };
 		C70721DB28EFFCCD00844D21 /* GitHubUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -65,6 +68,11 @@
 		C70721EB28F07BB800844D21 /* PullsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullsLoader.swift; sourceTree = "<group>"; };
 		C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePullReqLoaderTests.swift; sourceTree = "<group>"; };
 		C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemotePullReqLoader.swift; sourceTree = "<group>"; };
+		C70721F328F1E93800844D21 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullRequestMapper.swift; sourceTree = "<group>"; };
+		C70721F828F1F90600844D21 /* AlamofireHttpClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireHttpClientTests.swift; sourceTree = "<group>"; };
+		C70721FA28F206A900844D21 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		C70721FC28F21E4A00844D21 /* AlamofireHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireHTTPClient.swift; sourceTree = "<group>"; };
 		CF009F36ACF3E53D72183C14 /* Pods-GitHub-GitHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHub-GitHubUITests.release.xcconfig"; path = "Target Support Files/Pods-GitHub-GitHubUITests/Pods-GitHub-GitHubUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D510708579FD362F39EF9996 /* Pods_GitHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFC2BC1BF8861F0EECB5B5 /* Pods_GitHub_GitHubUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHub_GitHubUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,8 +160,8 @@
 		C70721CE28EFFCCD00844D21 /* GitHubTests */ = {
 			isa = PBXGroup;
 			children = (
-				C70721CF28EFFCCD00844D21 /* GitHubTests.swift */,
-				C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */,
+				C70721FA28F206A900844D21 /* XCTestCase+MemoryLeakTracking.swift */,
+				C70721F728F1F04C00844D21 /* PullRequestApi */,
 			);
 			path = GitHubTests;
 			sourceTree = "<group>";
@@ -180,8 +188,20 @@
 			isa = PBXGroup;
 			children = (
 				C70721F128F166DC00844D21 /* RemotePullReqLoader.swift */,
+				C70721F528F1E9AF00844D21 /* PullRequestMapper.swift */,
+				C70721F328F1E93800844D21 /* HTTPClient.swift */,
+				C70721FC28F21E4A00844D21 /* AlamofireHTTPClient.swift */,
 			);
 			path = PullReqApi;
+			sourceTree = "<group>";
+		};
+		C70721F728F1F04C00844D21 /* PullRequestApi */ = {
+			isa = PBXGroup;
+			children = (
+				C70721EE28F15A6E00844D21 /* RemotePullReqLoaderTests.swift */,
+				C70721F828F1F90600844D21 /* AlamofireHttpClientTests.swift */,
+			);
+			path = PullRequestApi;
 			sourceTree = "<group>";
 		};
 		F55D973B05D35622AB2B0A6B /* Pods */ = {
@@ -194,7 +214,6 @@
 				F3500CD7AB6A7AA47ADA7A91 /* Pods-GitHubTests.debug.xcconfig */,
 				98839BD0C2C4ABDBF59E8F3A /* Pods-GitHubTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -458,7 +477,10 @@
 				C70721F228F166DC00844D21 /* RemotePullReqLoader.swift in Sources */,
 				C70721EC28F07BB800844D21 /* PullsLoader.swift in Sources */,
 				C70721BD28EFFCCB00844D21 /* ViewController.swift in Sources */,
+				C70721F428F1E93800844D21 /* HTTPClient.swift in Sources */,
 				C70721B928EFFCCB00844D21 /* AppDelegate.swift in Sources */,
+				C70721FD28F21E4A00844D21 /* AlamofireHTTPClient.swift in Sources */,
+				C70721F628F1E9AF00844D21 /* PullRequestMapper.swift in Sources */,
 				C70721EA28F07A0E00844D21 /* PullRequest.swift in Sources */,
 				C70721BB28EFFCCB00844D21 /* SceneDelegate.swift in Sources */,
 			);
@@ -469,7 +491,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70721EF28F15A6E00844D21 /* RemotePullReqLoaderTests.swift in Sources */,
-				C70721D028EFFCCD00844D21 /* GitHubTests.swift in Sources */,
+				C70721FB28F206A900844D21 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				C70721F928F1F90600844D21 /* AlamofireHttpClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,6 +723,7 @@
 				DEVELOPMENT_TEAM = G3X3Y83455;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Sreekanth.GitHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -721,6 +745,7 @@
 				DEVELOPMENT_TEAM = G3X3Y83455;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Sreekanth.GitHubTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
