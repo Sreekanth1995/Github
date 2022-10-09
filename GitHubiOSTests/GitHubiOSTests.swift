@@ -20,11 +20,11 @@ final class PullsViewController: UITableViewController {
         super.viewDidLoad()
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadPulls), for: .valueChanged)
-        refreshControl?.beginRefreshing()
         loadPulls()
     }
     
     @objc func loadPulls() {
+        refreshControl?.beginRefreshing()
         loader.load() {[weak self] _ in
             guard let self = self else { return }
             self.refreshControl?.endRefreshing()
@@ -39,39 +39,38 @@ final class PullsViewController: UITableViewController {
 
 final class PullsViewControllerTests: XCTestCase {
     
-    func test_init_doesNotLoadPullsOnInitialisation() {
-        let (_, loader) = makeSUT()
-        XCTAssertEqual(loader.callCount, 0)
-    }
-    
-    func test_viewDidLoad_loadPulls() {
+    func test_loadPullsActions_requestPullsFromLoader() {
         let (sut, loader) = makeSUT()
+        XCTAssertEqual(loader.callCount, 0)
+        
         sut.loadViewIfNeeded()
         XCTAssertEqual(loader.callCount, 1)
-    }
-    
-    func test_pullsToRefresh_loadPulls() {
-        let (sut, loader) = makeSUT()
-        sut.loadViewIfNeeded()
-        sut.refreshControl?.simulatePullToRefresh()
+
+        sut.simulateUserInitiatedPullsLoad()
         XCTAssertEqual(loader.callCount, 2)
-        sut.refreshControl?.simulatePullToRefresh()
+
+        sut.simulateUserInitiatedPullsLoad()
         XCTAssertEqual(loader.callCount, 3)
     }
     
-    func test_viewdidLoad_showLoadingIndicator() {
-        let (sut, _) = makeSUT()
-        sut.loadViewIfNeeded()
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, true)
-    }
-    
-    func test_viewdidLoad_hidesLoadingIndicatorOnPullsLoad() {
+    func test_viewdidLoad_showsLoadingIndicator() {
         let (sut, loader) = makeSUT()
+        
         sut.loadViewIfNeeded()
-        loader.completePullsLoading()
-        XCTAssertEqual(sut.refreshControl?.isRefreshing, false)
+        XCTAssertEqual(sut.isShowingLoadingIndicator, true)
+        
+        loader.completePullsLoading(at: 0)
+        XCTAssertEqual(sut.isShowingLoadingIndicator, false)
+
+        sut.simulateUserInitiatedPullsLoad()
+        XCTAssertEqual(sut.isShowingLoadingIndicator, true)
+
+        loader.completePullsLoading(at: 1)
+        XCTAssertEqual(sut.isShowingLoadingIndicator, false)
+        
     }
     
+
     // MARK: - Helpers
     
     private func makeSUT(url: URL = URL(string: "https://api.github.com")!, file: StaticString = #file, line: UInt = #line) -> (sut: PullsViewController, loader: LoaderSpy) {
@@ -94,11 +93,21 @@ final class PullsViewControllerTests: XCTestCase {
             completions.append(completion)
         }
         
-        func completePullsLoading() {
-            completions[0](.success([]))
+        func completePullsLoading(at index: Int) {
+            completions[index](.success([]))
         }
     }
     
+}
+
+extension PullsViewController {
+    func simulateUserInitiatedPullsLoad() {
+        refreshControl?.simulatePullToRefresh()
+    }
+    
+    var isShowingLoadingIndicator: Bool {
+        refreshControl?.isRefreshing ?? false
+    }
 }
 
 extension XCTestCase {
