@@ -8,24 +8,17 @@
 import Foundation
 
 class PullRequestViewModel {
-    private enum State {
-        case pending
-        case loading
-        case failed
-        case loaded([PullRequest])
-    }
-    
+    typealias Observer<T> = (T) -> Void
     private let loader: PullRequestsLoader
     
     var isLoading: Bool = false {
         didSet {
-            onChange?(self)
+            onChange?(isLoading)
         }
     }
     
-    
-    var onChange: ((PullRequestViewModel) -> Void)?
-    var onPullReqsLoad: (([PullRequest]) -> Void)?
+    var onChange: Observer<Bool>?
+    var onPullReqsLoad: Observer<[PullRequest]>?
     
     init(loader: PullRequestsLoader) {
         self.loader = loader

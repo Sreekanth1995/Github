@@ -20,12 +20,11 @@ final class PullsRefreshViewController: NSObject {
     }
     
     private func binded(view: UIRefreshControl) -> UIRefreshControl {
-        viewModel.onChange = {[weak self] viewModel in
-            guard let self = self else { return }
-            if viewModel.isLoading {
-                self.view.beginRefreshing()
+        viewModel.onChange = {[weak view] isLoading in
+            if isLoading {
+                view?.beginRefreshing()
             } else {
-                self.view.endRefreshing()
+                view?.endRefreshing()
             }
         }
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)

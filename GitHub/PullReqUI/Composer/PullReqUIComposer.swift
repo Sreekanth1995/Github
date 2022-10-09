@@ -13,7 +13,9 @@ final class PullReqUIComposer {
     public static func pullReqsCompose(with loader: PullRequestsLoader) -> PullsViewController {
         let viewModel = PullRequestViewModel(loader: loader)
         let refreshViewController = PullsRefreshViewController(viewModel: viewModel)
-        let viewController = PullsViewController(refreshController: refreshViewController)
+        let storyBoard = UIStoryboard(name: "Main", bundle: Bundle(for: PullsViewController.self))
+        let viewController = storyBoard.instantiateInitialViewController() as! PullsViewController
+        viewController.refreshController = refreshViewController
         viewModel.onPullReqsLoad = adaptPullRequestToCellControllers(viewController: viewController)
         return viewController
     }
