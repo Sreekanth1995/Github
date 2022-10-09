@@ -41,3 +41,14 @@
 #### Network connectivity - Error Course (Sad Path): 
 
 
+## UX Goals:
+    - Load Pulls automatically when view is presented
+    - Allow customer to reload the data (pull to refresh) 
+    - Show a loading indicator while refreshing
+    - Render all loaded PullReq data
+    - Make a call for next page of data at the end of the list 
+    - User Image loading
+        - Load when ImageView is visisble
+        - Cancel when ImageView is out of visible area
+        - Show placeholder while image is loading
+        - Preload when imageview is near visible
