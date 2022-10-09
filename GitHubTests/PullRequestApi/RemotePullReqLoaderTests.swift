@@ -169,17 +169,17 @@ class PullReqLoaderTests: XCTestCase {
     }
     
     private class HTTPClientSpy: HTTPClient {
-        private var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+        private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
         var requestedURLs: [URL] {
             return messages.map { $0.url }
         }
         
-        func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+        func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
             messages.append((url, completion))
         }
         
         func complete(with error: Error, at index: Int = 0) {
-            messages[index].completion(.failure(error))
+            messages[index].completion(HTTPClient.Result.failure(error))
         }
         
         func complete(withStatusCode statusCode: Int, data: Data = Data(), at index: Int = 0) {
@@ -187,13 +187,7 @@ class PullReqLoaderTests: XCTestCase {
                                            statusCode: statusCode,
                                            httpVersion: nil,
                                            headerFields: nil)!
-            messages[index].completion(.success(data, response))
+            messages[index].completion(HTTPClient.Result.success((data, response)))
         }
     }
 }
-
-
-
-
-
-
