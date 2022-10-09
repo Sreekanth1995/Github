@@ -125,6 +125,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Pull Requests" id="4MI-nf-UvX"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="LCb-Bx-dbR">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh" destination="cyE-RR-Jlf" eventType="valueChanged" id="JCw-94-iiP"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38R-Bu-sng" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

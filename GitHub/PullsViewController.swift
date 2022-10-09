@@ -7,13 +7,32 @@
 
 import UIKit
 
+struct PullReqViewModel {
+    let repoName: String
+    let stateIcon: String
+    let userImage: String
+    let title: String
+    let createdAt: String
+    let closedAt: String?
+}
+
 class PullsViewController: UITableViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var pulls = [PullReqViewModel]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refresh()
+        tableView.setContentOffset(CGPoint(x: 0, y: -tableView.contentInset.top), animated: false)
+    }
+    
+    @IBAction func refresh() {
+        refreshControl?.beginRefreshing()
         
     }
-
+    
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
