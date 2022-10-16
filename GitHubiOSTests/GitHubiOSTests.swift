@@ -51,6 +51,14 @@ final class PullsViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.numberOfRenderItems(), 1)
     }
     
+    func test_loadPullsCompletion_failedwithError() {
+        let (sut, loader) = makeSUT()
+        sut.loadViewIfNeeded()
+        XCTAssertNil(sut.errorMessage())
+        loader.completeFetchingWithError()
+        XCTAssertNotNil(sut.errorMessage())
+    }
+    
     func test_loadPullsCompleteion_inBackgroundThread() {
         let (sut, loader) = makeSUT()
         sut.loadViewIfNeeded()
@@ -156,6 +164,9 @@ extension PullsViewController {
         return tableView.numberOfRows(inSection: 0)
     }
     
+    func errorMessage() -> String? {
+        return errorView.message
+    }
 }
 
 extension XCTestCase {
