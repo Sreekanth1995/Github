@@ -27,10 +27,10 @@ final class RemotePullRequestLoader: PullRequestsLoader {
         client.get(from: url, completion: { [weak self] result in
             guard self != nil else { return }
             switch result {
-            case .success(let data, let response):
+            case .success((let data, let response)):
                 completion(PRItemsMapper.map(data: data, response: response))
-            case .failure:
-                completion(PullRequestsLoader.Result.failure(Error.connectivity))
+            case .failure(let err):
+                completion(PullRequestsLoader.Result.failure(err))
             }
         })
     }    

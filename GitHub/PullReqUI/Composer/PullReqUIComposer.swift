@@ -17,6 +17,7 @@ final class PullReqUIComposer {
         let viewController = storyBoard.instantiateInitialViewController() as! PullsViewController
         viewController.refreshController = refreshViewController
         viewModel.onPullReqsLoad = adaptPullRequestToCellControllers(viewController: viewController, loader: imageLoader)
+        viewModel.onErrorMessageLoad = adaptErrorToErrorMessage(viewController: viewController)
         return viewController
     }
     
@@ -29,6 +30,12 @@ final class PullReqUIComposer {
                 })
                 return PullReqCellController(viewModel: viewModel)
             }
+        }
+    }
+    
+    private static func adaptErrorToErrorMessage(viewController: PullsViewController) -> ((Error?) -> Void) {
+        return {[weak viewController] error in
+            viewController?.errorView.message = error?.localizedDescription
         }
     }
 }

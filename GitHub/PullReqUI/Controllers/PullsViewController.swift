@@ -7,7 +7,44 @@
 
 import UIKit
 
+
+
+extension UIView {
+    public func makeContainer() -> UIView {
+        let container = UIView()
+        container.backgroundColor = .clear
+        container.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor),
+            topAnchor.constraint(equalTo: container.topAnchor),
+            container.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        
+        return container
+    }
+}
+
+
+extension UITableView {
+    func sizeTableHeaderToFit() {
+        guard let header = tableHeaderView else { return }
+        
+        let size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        
+        let needsFrameUpdate = header.frame.height != size.height
+        if needsFrameUpdate {
+            header.frame.size.height = size.height
+            tableHeaderView = header
+        }
+    }
+}
+
 final class PullsViewController: UITableViewController, UITableViewDataSourcePrefetching {
+    private(set) var errorView = ErrorView()
+    
     var refreshController: PullsRefreshViewController?
     var tableModels = [PullReqCellController]() {
         didSet {
@@ -18,10 +55,21 @@ final class PullsViewController: UITableViewController, UITableViewDataSourcePre
     override func viewDidLoad() {
         super.viewDidLoad()
         title = refreshController?.viewModel.title
-        tableView.prefetchDataSource = self
         refreshControl = refreshController?.view
         refreshController?.refresh()
+        setupTableView()
     }
+    
+    private func setupTableView() {
+        tableView.prefetchDataSource = self
+        tableView.tableHeaderView = errorView.makeContainer()
+        errorView.onHide = { [weak self] in
+            self?.tableView.beginUpdates()
+            self?.tableView.sizeTableHeaderToFit()
+            self?.tableView.endUpdates()
+        }
+    }
+    
     
     // MARK: - Table view data source
 
